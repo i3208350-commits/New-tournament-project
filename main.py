@@ -75,6 +75,8 @@ def menu():
                 f.Show_teams_without_wins()
             if choice==9:
                 f.Show_tournament_summary()
+            if choice == 10:
+                f.Check_championship_potential()
 
             if choice==0:
                   break

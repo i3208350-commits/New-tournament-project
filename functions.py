@@ -110,17 +110,41 @@ def Show_best_attacking_team():
     print(f"The leading team is  {sorting_goals_against[0]}")
     if sorting_goals_against == 0:
         print("There are no games in the system")
-# def Show_team_success_rate():
+def Show_team_success_rate():
+    o=sorted(m.itams,key=lambda t: t,reverse=True )
+    for i in o:
+       if i["played"]==0:
+           print(f"{i["name"]} No games")
+       else:
+           print((i["ponits"]/ (i["played"]*3))*100)
+
 
 
 def Show_teams_without_wins():
-    for i in m.itams:
-        if i["wins"]==0:
-           print(i["name"])
+    o = sorted(m.itams, key=lambda t: t, reverse=True)
+    for i in o:
+        if i["played"] > 0:
+            for i in m.itams:
+                if i["wins"]==0:
+                   print(i["name"])
 
 
-def  Show_tournament_summary():
-    print(m.matches)
+def Show_tournament_summary():
+    number_of_gates=sum(map(lambda t: t["name"],m.itams  ))
+    number_of_played= sum(map(lambda t: t["played"], m.itams))
+    number_of_goals_for = sum(map(lambda t: t["goals_for"], m.itams))
+    Average_goals_per_game = sum(map(lambda t: t["played"]/number_of_goals_for, m.itams))
+    number_of_gates = sum(map(lambda t: t["ponits"], m.itams))
+
+    print(f"the number of games {number_of_gates}"
+          f"the number of games{number_of_played} \n"
+          f" The number of expatriates {number_of_goals_for}\n"
+          f"Average goals per game{Average_goals_per_game}")
+
+
+
+
+
 
 
 
