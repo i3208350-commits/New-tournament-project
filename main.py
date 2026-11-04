@@ -57,7 +57,15 @@ def menu():
     if choice==3:
         f.add_match_result()
     if choice==4:
-        f.Show standings()
+        f.Show_standings()
+    if choice==5:
+        f.Show_leading_team()
+    if choice==6:
+        f.Show_best_attacking_team()
+    if choice==7:
+        f.Show_best_attacking_team()
+
+
 
 
 

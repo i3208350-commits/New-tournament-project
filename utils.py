@@ -62,4 +62,11 @@ def loading_data(x):
             if wins==0:
                 i["draws"]+=1
                 i["ponits"]+=1
-    
+
+def Check_if_you_played(x):
+    for i in m.itams:
+        if i["id"]==x:
+            if i["played"]==0:
+               return True
+        else:
+            return False
