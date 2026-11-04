@@ -13,6 +13,8 @@ def positive_integers(x):
     if x<0:
         print("You did not submit a positive number.")
         m.menu()
+    else:
+        return True
 
 def Group_testing(x):
     for i in m.itams:

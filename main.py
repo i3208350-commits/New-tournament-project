@@ -42,21 +42,27 @@ def menu():
     print("8. Show teams without wins")
     print("9. Show tournament summary")
     print("10.Check championship potential")
-    print("0. Exit Choose an option:")
+    print("0. Exit Choose an option:     ")
 
     choice=int(input("Tap your choice"))
-
+    # while True:
+    #     if choice==0:
+    #           break
 
     if choice==1:
-        f.add_team()
+            f.add_team()
 
     if choice==2:
-        f.show_all_teams()
-        # if choice==3:
-    # print(itams)
-    while choice!=0:
-            menu()
-   
+            f.show_all_teams()
+    if choice==3:
+        f.add_match_result()
+    if choice==4:
+        f.Show standings()
+
+
+
+
+
 
 
 

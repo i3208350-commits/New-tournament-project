@@ -27,7 +27,8 @@ def add_team():
             add_1 = add_1.lower()
             for i in m.itams:
                 if i["name"]==add_1:
-                    print("The name exists in the system")
+                    print ("The name exists in the system")
+                    return
 
             team["name"] = add_1
             name_id=int(input("Enter the name id"))
@@ -37,8 +38,8 @@ def add_team():
                         print("The name id exists in the system")
                 team["id"]=name_id
             m.itams.append(team)
-            print("Entered successfully!")
-            print(m.itams)
+        return("Successfully inserted")
+           
     except:
         print("Data entry error")
 
@@ -46,24 +47,26 @@ def add_team():
 def show_all_teams():
         if not m.itams:
               print("empty list")
-        for i in m.itams:
+              return
+        else:
+           for i in m.itams:
            
                 print(f"The group name is {i["name"]}")
                 print(f"id = {i["id"]}")
                 print(f"Number of games= {i["played"]}")
                 print(f"Number of points for the team:{i[ "ponits"]}")
-            
+                
 
 
 def add_match_result(x):
     match_1=int(input("Enter game result"))
     examination_1=u.id_testing(match_1)
     exiles_1=int(input("How many goals did the team score?"))
-    examination_2=positive_integers(exiles_1)
+    examination_2=u.positive_integers(exiles_1)
     match_2=int(input("Enter game result"))
     examination_3=u.id_testing(match_2)
     exiles_2=int(input("How many goals did the team score?"))
-    examination_4=positive_integers(exiles_2)
+    examination_4=u.positive_integers(exiles_2)
     if examination_1 and examination_2 and examination_3 and examination_4==True and match_1 != match_2:
         for i in m.matches:
               i["home_team_id"]= match_1
@@ -74,6 +77,11 @@ def add_match_result(x):
 
     else:
          print("There is an error in the input.")
+def Show_standings():
+    sorting_ponits=sorted(m.itams,key=lambda t:t ["ponits"], reverse=True),
+    sorting_ponits=sorted(m.itams, key=lambda t: t["goals_for"]-["goals_against"], reverse=True),
+    sorting_goals_for=sorted(m.itams, key=lambda t: t["goals_for"], reverse=True),
+    sorting_goals_against=sorted(m.itams, key=lambda t: t["goals_against"], reverse=True),
 
               
               
