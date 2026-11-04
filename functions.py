@@ -1,5 +1,6 @@
 import main as m
 import utils as u
+import loggin
 
 
 
@@ -38,10 +39,12 @@ def add_team():
                         print("The name id exists in the system")
                 team["id"]=name_id
             m.itams.append(team)
-        return("Successfully inserted")
+        print("Successfully inserted")
            
     except:
         print("Data entry error")
+        add_team()
+
 
 
 def show_all_teams():
@@ -58,66 +61,66 @@ def show_all_teams():
                 
 
 
-def add_match_result(x):
-    match_1=int(input("Enter game result"))
-    examination_1=u.id_testing(match_1)
-    examination_1_1=u.Check_if_you_played()
-    exiles_1=int(input("How many goals did the team score?"))
-    examination_2=u.positive_integers(exiles_1)
-    match_2=int(input("Enter game result"))
-    examination_2_2=u.Check_if_you_played()
-    examination_3=u.id_testing(match_2)
-    exiles_2=int(input("How many goals did the team score?"))
-    examination_4=u.positive_integers(exiles_2)
-    if examination_1 and examination_2 and examination_3 and examination_4==True and match_1 != match_2 and examination_1_1==True and examination_2_2==True:
+def add_match_result():
+    try:
+        match_1=int(input("Enter game result"))
+        examination_1=u.id_testing(match_1)
 
-              m.matches["home_team_id"]= match_1
-              m.matches["away_team_id"]= match_2
-              m.matches["home_goal"]= exiles_1
-              m.matches["away_goals"]= exiles_2
-              u.loading_data(m.matches)
+        exiles_1=int(input("How many goals did the team score?"))
+        examination_2=u.positive_integers(exiles_1)
+        match_2=int(input("Enter game result"))
 
-    else:
-         print("There is an error in the input.")
+        examination_3=u.id_testing(match_2)
+        exiles_2=int(input("How many goals did the team score?"))
+        examination_4=u.positive_integers(exiles_2)
+        examination_5=u.Check_if_you_played(exiles_1,match_2)
+        if examination_1 and examination_2 and examination_3 and examination_4==True and match_1 != match_2 and examination_5==True:
+
+                  m.matches["home_team_id"]= match_1
+                  m.matches["away_team_id"]= match_2
+                  m.matches["home_goal"]= exiles_1
+                  m.matches["away_goals"]= exiles_2
+                  m.itam_matches.append(m.matches)
+                  u.loading_data(m.matches)
+
+        else:
+             print("There is an error in the input.")
+    except:
+        add_match_result()
 
 def Show_standings():
-    sorting_goals_against = sorted(m.itams, key=lambda t: t["goals_against"], reverse=True)
-    sorting_ponits=sorted(m.itams,key=lambda t:t ["ponits"], reverse=True),
-    sgoal_difference=sorted(m.itams, key=lambda t: t["goals_for"]-["goals_against"], reverse=True),
-    sorting_name=sorted(m.itams, key=lambda t: t["name"], reverse=True)
-    sorting_goals_for=sorted(m.itams, key=lambda t: t["goals_for"], reverse=True)
-    print("Select the filter")
-    print("1. points")
-    print("2. goal difference")
-    print("3. Right gates")
-    print("4. name")
-    print("5. Points difference, right less obligation")
-    Internal_choice=(input("Enter your choice"))
-    if Internal_choice==1:
-        print(sorting_goals_against)
-    if Internal_choice==2:
-        print(sorting_ponits)
-    if Internal_choice==3:
-        print(sgoal_difference)
-    if Internal_choice==4:
-        print(sorting_name)
-    if Internal_choice==5:
-        print(sorting_goals_for)
+    sorting_goals_against = sorted(m.itams, key=lambda t:( t["ponits"],t["goals_for"]-t["goals_againts"],t["goals_for"],t["name"]) ,reverse=True)
+
+
+
+    print(sorting_goals_against)
+
 
 
               
 def Show_leading_team():
-    sorting_goals_against = sorted(m.itams, key=lambda t: t["goals_against"], reverse=True)
-    print(f"The leading team is  {sorting_goals_against}")
+    sorting_goals_against = sorted(m.itams, key=lambda t: t["ponits"], reverse=True)
+    print(f"The leading team is  {sorting_goals_against[0]}")
     if sorting_goals_against==0:
         print ("There are no games in the system")
          
 #     
 def Show_best_attacking_team():
     sorting_goals_against = sorted(m.itams, key=lambda t: t["goals_for"], reverse=True)
-    print(f"The leading team is  {sorting_goals_against}")
+    print(f"The leading team is  {sorting_goals_against[0]}")
     if sorting_goals_against == 0:
         print("There are no games in the system")
+# def Show_team_success_rate():
+
+
+def Show_teams_without_wins():
+    for i in m.itams:
+        if i["wins"]==0:
+           print(i["name"])
+
+
+def  Show_tournament_summary():
+    print(m.matches)
 
 
 

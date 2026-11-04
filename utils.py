@@ -1,4 +1,5 @@
 import main as m
+import loggin
 def a_test_that_is_filled(x):
     if x=="":
         return False
@@ -7,11 +8,11 @@ def a_test_that_is_filled(x):
 
 
 def positive_integers(x):
-    if x!=int:
+    if not isinstance(x,int):
         print("You did not submit a whole number.")
         m.menu()
     if x<0:
-        print("You did not submit a positive number.")
+        print("You did not submit a positive number_1.")
         m.menu()
     else:
         return True
@@ -29,10 +30,7 @@ def id_testing(x):
         else:
             return False
 def loading_data(x):
-    
 
-
-    
     for i in m.itams:
         wins=0
         if m.matches["home_goal"]>m.matches["away_goals"]:
@@ -63,10 +61,26 @@ def loading_data(x):
                 i["draws"]+=1
                 i["ponits"]+=1
 
-def Check_if_you_played(x):
-    for i in m.itams:
-        if i["id"]==x:
-            if i["played"]==0:
-               return True
-        else:
+def Check_if_you_played(x,v):
+    for i in m.itam_matches:
+        if i["home_team_id"]==x["home_team_id"] and i["away_team_id"]== v["away_team_id"] or i["away_team_id"]==x["home_team_id"] and i["home_team_id"]== v["away_team_id"]:
             return False
+
+        else:
+            return True
+
+def Show_team_success_rate():
+    for i in m.itams:
+               if i["ponits"]==0:
+                   print("No games")
+               else:
+                   print( sorted(i["ponits"] / (["played"] * 3) * 100))
+
+# def Show_teams_without_wins():
+
+
+
+
+
+
+
